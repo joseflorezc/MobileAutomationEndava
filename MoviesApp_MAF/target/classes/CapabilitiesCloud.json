@@ -1,0 +1,7 @@
+{
+  "deviceName": "Galaxy A10",
+  "appPackage": "com.imdb.mobile",
+  "appActivity": "com.imdb.mobile.HomeActivity",
+  "platformName": "Android",
+  "platformVersion": "11.0"
+}
