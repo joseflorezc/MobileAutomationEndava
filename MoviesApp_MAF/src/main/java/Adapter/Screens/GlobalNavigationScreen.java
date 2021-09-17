@@ -26,7 +26,7 @@ public class GlobalNavigationScreen extends BaseMobileScreen {
 
 
     public SearchScreen clickingOnSearchIcon(){
-        waitUntilElementPresent(searchButton);
+        waitImplicit();
         LOGGER.debug("Clicking on search Icon");
         searchButton.click();
         return new SearchScreen(driver);
