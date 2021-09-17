@@ -14,6 +14,7 @@ public class YouScreen extends BaseMobileScreen {
     }
 
     public String playListElementTitle(){
+
         waitUntilElementPresent(playListElement);
         return playListElement.getText();
     }

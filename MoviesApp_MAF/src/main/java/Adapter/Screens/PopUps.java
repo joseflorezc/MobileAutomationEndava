@@ -32,6 +32,7 @@ public class PopUps extends BaseMobileScreen {
     }
 
     public void lettingApplicationUseLocationWhileInUse() {
+        waitImplicit();
         whileAppInUseButton.click();
     }
 

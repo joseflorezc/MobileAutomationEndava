@@ -46,7 +46,7 @@ public class SearchScreen extends BaseMobileScreen {
         LOGGER.debug("Selecting first movie");
         waitUntilElementPresent(firstResultElement);
         firstResultElement.click();
-
+        waitImplicit();
         return new MovieDetailScreen(driver);
 
     }
@@ -63,6 +63,8 @@ public class SearchScreen extends BaseMobileScreen {
         int elementPicked = CommonSteps.getRandomNumberInRange(0, 7);
         return listResults.get(elementPicked);
     }
+
+
 
 
 

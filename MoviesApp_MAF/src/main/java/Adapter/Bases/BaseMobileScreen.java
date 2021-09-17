@@ -7,15 +7,20 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import org.apache.logging.log4j.core.config.Configurator;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
@@ -64,16 +69,33 @@ public class BaseMobileScreen {
         driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector()."));
 //        driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().description(\""+parentScrollViewId+"\")).scrollForward()"));
     }
-    public void scrollToElementTouchAction(AndroidElement androidElement)
+    public void scrollToElementTouchAction(WebElement webElement)
     {
-        TouchAction action = new TouchAction(driver);
-
+        TouchActions action = new TouchActions(driver);
+        action.scroll(webElement, 10 ,100);
         action.perform();
     }
 
     public void hideKeyBoard (){
 
         driver.hideKeyboard();
+    }
+
+    public void scrollDown(){
+        Dimension dimension = driver.manage().window().getSize();
+
+        Double scrollHeightStart = dimension.getHeight()*0.5;
+        int scrollStart = scrollHeightStart.intValue();
+
+        Double scrollHeightEnd = dimension.getHeight()*0.2;
+        int scrollEnd = scrollHeightEnd.intValue();
+
+        new TouchAction(driver)
+                .press(PointOption.point(10,scrollStart))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(10,scrollEnd))
+                .release().perform();
+
     }
 
 

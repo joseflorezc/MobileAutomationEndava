@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class SearchTests extends BaseMobileTest {
 
-    @Test
+    @Test(priority = 0)
     public void searchingMovieAndCheckingPlotOverviewMatches (){
 
         HomeScreen homeScreen = loginScreen.skipLogin();
@@ -25,7 +25,7 @@ public class SearchTests extends BaseMobileTest {
 
     }
 
-    @Test
+    @Test(priority = 1)
     public void searchingMovieAddingToPlayListAndCheckingItAddedCorrectly (){
 
     HomeScreen homeScreen = loginScreen.loginWithGoogleEmail();
@@ -49,17 +49,27 @@ public class SearchTests extends BaseMobileTest {
 
     }
 
-    @Test
-    public void test3 (){
+    @Test(priority = 2)
+    public void RatingAMovieAndGettingSuccessMessage (){
 
-        HomeScreen homeScreen = loginScreen.skipLogin();
+        HomeScreen homeScreen = loginScreen.loginWithGoogleEmail();
 
         SearchScreen searchScreen = globalNavigationScreen.clickingOnSearchIcon();
         popUps.closeAdvicePopUp();
         searchScreen.openingSearchBar();
-        searchScreen.sendingSearchQuery("Deadpool 2");
+        searchScreen.sendingSearchQuery("Christmas");
 
         MovieDetailScreen movieDetailScreen = searchScreen.selectingFirstMovie();
+
+        movieDetailScreen.scrollingToMovieOrTVShowRate();
+        RateScreen rateScreen = movieDetailScreen.clickOnRate();
+
+        rateScreen.rateMovieOrTVShowWithEightStars();
+        rateScreen.sendRate();
+
+        assertThat("The rate success message was not equal to the one expected", movieDetailScreen.rateSuccessMessageText(), equalTo("Rating saved"));
+
+
 
     }
 

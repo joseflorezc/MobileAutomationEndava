@@ -32,7 +32,7 @@ public class BaseMobileTest {
 
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void TearDown() {
         driver.quit();
     }
