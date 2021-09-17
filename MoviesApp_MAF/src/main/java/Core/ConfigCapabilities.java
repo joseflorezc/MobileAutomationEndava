@@ -3,10 +3,12 @@ package Core;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.pmw.tinylog.Logger;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 public class ConfigCapabilities {
     private static final String DEVICE_NAME = "deviceName";
@@ -17,6 +19,8 @@ public class ConfigCapabilities {
     private static final String JSON_FILE_PATH = "src/main/resources/Capabilities.json";
     private static JsonParser parser = new JsonParser();
     private static DesiredCapabilities capabilities = new DesiredCapabilities();
+
+    private final static Logger LOGGER = getLogger(ConfigCapabilities.class.getName());
 
     private static void ApplicationSetUp(DesiredCapabilities capabilities){
         capabilities.setCapability("appPackage", getJsonDataProperty(APP_PACKAGE));
@@ -34,14 +38,14 @@ public class ConfigCapabilities {
             JsonObject jsonObject = (JsonObject) obj;
             return jsonObject.get(property).getAsString();
         } catch (FileNotFoundException e) {
-            Logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         } catch (Exception e) {
-            Logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         }
         return "";
     }
 
-    public DesiredCapabilities GetCapabilities(){
+    public static DesiredCapabilities GetCapabilities(){
             ConfigCapabilities.ApplicationSetUp(capabilities);
         return capabilities;
     }
