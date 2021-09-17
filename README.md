@@ -1,6 +1,7 @@
 # MobileAutomationEndava Jose Manuel Florez
 
-##
+## About the Project 
+The objective of this project is to practice the appium framework with IMDb Application.
 
 ## 1. Automate the following test case (optional or create a new one of your choice)
 - Given the application IMDB
